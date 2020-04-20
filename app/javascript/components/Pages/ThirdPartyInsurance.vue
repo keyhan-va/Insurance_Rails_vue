@@ -231,12 +231,14 @@
     
   }
 
+
   .box-card {
     font-size: 25px;
     /* text-align: center; */
     width: 90%;
     margin: 20px auto 0 auto;
     float: none;
+    height: 500px;
   }
 
  

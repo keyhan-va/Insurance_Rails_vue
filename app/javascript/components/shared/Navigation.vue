@@ -45,6 +45,8 @@
                     <li><router-link to="/user/recharge">بیمه مسئولیت مهندسان</router-link></li>
                 </ul>
             </li>
+
+            <li><router-link  to="/AddInsurance">اضافه کردن بیمه</router-link></li>
         </el-col>
 
         <el-col :span="2" class="navbar__logo-box">

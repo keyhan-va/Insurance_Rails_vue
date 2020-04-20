@@ -8,6 +8,7 @@ import Home from '../components/Pages/Home.vue';
 import ThirdPartyInsurance from '../components/Pages/ThirdPartyInsurance.vue';
 import CarBodyInsurance from '../components/Pages/CarBodyInsurance.vue';
 import MotorcycleInsurance from '../components/Pages/MotorcycleInsurance.vue';
+import AddInsurance from '../components/Pages/AddInsurance.vue';
 
 
 // import { Header } from 'element-ui';
@@ -46,6 +47,12 @@ export default new VueRouter({
             path: '/MotorcycleInsurance',
             name: 'MotorcycleInsurance',
             component: MotorcycleInsurance
+        },
+
+        {
+            path: '/AddInsurance',
+            name: 'AddInsurance',
+            component: AddInsurance
         },
 
 
