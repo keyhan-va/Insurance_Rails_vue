@@ -12,7 +12,7 @@
                     
             <br>
 
-            <el-select v-model="selectedModel"  placeholder="مدل خودرو" no-data-text ="موردی یافت نشد">
+            <el-select v-model="vehicle.model"  placeholder="مدل خودرو" no-data-text ="موردی یافت نشد">
                 <el-option v-for="model in models" :value="model" :label="model" :key="model.index">{{ model }}</el-option>
             </el-select>
                    
@@ -21,22 +21,36 @@
             </el-select>
 
             <br>
-            <el-input class="priceinput" placeholder="قیمت پایه ی بیمه" v-model="input" @input="changeprice"></el-input>
-                <p>قیمت پایه ی بیمه {{showprice}} تومان</p>
+            <el-input class="priceinput" placeholder="قیمت پایه ی بیمه" v-model="vehicle.price" @input="changeprice"></el-input>
+            <br> <br>
+            <p>قیمت پایه ی بیمه {{showprice}} تومان</p>
+
+            <!-- <p>{{ vehicle.kind}} , {{vehicle.brand}},{{vehicle.model}}</p> -->
             <br>
 
-            <el-button-group class="btn">
-                <el-button type="primary" plain icon="el-icon-arrow-left" size="small" @click="next">بعدی</el-button>
-                <el-button type="primary" plain size="small" @click="prev" disabled>قبلی<i class="el-icon-arrow-right" ></i></el-button>
-            </el-button-group>
+            
+            <el-button class="Savebtn" type="Submit" @click="addvehicle(vehicle.id)">ثبت</el-button>
+            <br><br>
+            <div v-for="vehicle in vehicles" v-bind:key="vehicle.id">
+                <el-card >
+                    <h6 class="desciption">خودرو {{vehicle.kind}} برند {{ vehicle.brand}} مدل {{vehicle.model}} قیمت پایه ی بیمه {{vehicle.price}}</h6>
+                    <hr><br>
+                    <el-button type="danger" icon="el-icon-delete" size="mini"  @click="deletvehicle(vehicle.id)" circle></el-button>
+                    <el-button type="primary" icon="el-icon-edit" size="mini" @click="editvehicle(vehicle)" circle></el-button>
+                </el-card>
+            </div>
         </el-tab-pane>
     </el-tabs>
+    
+    
+    
 </template>
 
 
 
 
 <script>
+  import axios from 'axios'
   export default {
     data() {
       return {
@@ -84,8 +98,25 @@
         brands:[],
         models:[],
         selectedKindLabel:'',
+
+        vehicles: [],
+        vehicle:{
+            kind: '',
+            brand: '',
+            model: '',
+            price: '',
+            
+        },
+        vehicle_id: '',
+        edit: false
       };
     },
+
+    created(){
+        this.fetchvehicles();
+    },
+
+
     methods: {
       handleClick(tab, event) {
         console.log(tab, event);
@@ -94,12 +125,14 @@
         this.brands='',
         this.selectedKindLabel = this.Kinds[this.selectedKind].label;
         this.brands = this.Kinds[this.selectedKind].brands;
+        this.vehicle.kind = this.selectedKindLabel;
       },
 
       selectbrand: function() {
         this.selectedBrand= '';
         this.models='';
         this.selectedBrand = this.brands[this.selectedBrandIndex];
+        this.vehicle.brand = this.selectedBrand;
         this.models= this.Kinds[this.selectedKind].models[this.selectedBrandIndex];
       },
       prev: function() {
@@ -111,15 +144,110 @@
       submit: function() {
         alert('Submit to blah and show blah and etc.');      
       },
-
       changeprice: function(){
-          
         this.showprice = this.input;
-      }
+      },
+
+
       
+      fetchvehicles(){
+        fetch('http://localhost:3000/api/v1/thirdparties/')
+            .then(res => res.json())
+            .then(res => {
+            this.vehicles = res.data;
+             //console.log(res.data);
+            })
+        },
+        deletvehicle(id){
+            if(confirm('Are You Sure?')){
+                fetch(`http://localhost:3000/api/v1/thirdparties/${id}`,{
+                method: 'delete'
+                })
+                .then(res => res.json())
+                .then(data => {
+                alert('vehicle Removed');
+                this.fetchvehicles();
+                })
+                .catch(err => console.log(err));
+            }
+        },
+        addvehicle(id){
+            if (this.edit === false) {
+                //Add
+                
+                fetch('http://localhost:3000/api/v1/thirdparties/',{
+                method: 'post',
+                body: JSON.stringify(this.vehicle),
+                headers: {
+                    'content-type': 'application/json'
+                }
+                })
+                .then(res => res.json())
+                .then(data => {
+                this.selectedKind = '';
+                this.selectedBrandIndex = '';
+                this.vehicle.kind ='';
+                this.vehicle.brand = '';
+                this.vehicle.model = '';
+                this.vehicle.price = '';
+                this.vehicle.year = '';
+                alert('vehicle Added');
+                this.fetchvehicles();
+                })
+                .catch(err => console.log(err));
+            }
+            else{
+                //Update1
+          
+                fetch(`http://localhost:3000/api/v1/thirdparties/${id}`,{
+                method: 'put',
+                body: JSON.stringify(this.vehicle),
+                headers: {
+                    'content-type': 'application/json'
+                }
+                })
+                .then(res => res.json())
+                .then(data => {
+                this.selectedKind = '';
+                this.selectedBrandIndex = '';
+                this.vehicle.kind ='';
+                this.vehicle.brand = '';
+                this.vehicle.model = '';
+                this.vehicle.price = '';
+                this.vehicle.year = '';
+                alert('vehicle Updated');
+                this.fetchvehicles();
+                })
+                .catch(err => console.log(err));
+            }
+        },
+        editvehicle(vehicle) {
+            this.edit = true;
+
+            this.vehicle.id = vehicle.id;
+            this.vehicle.vehicle_id = vehicle.id;
+            // this.selectedKind = vehicle.kind;
+            // this.selectedBrand = vehicle.brand;
+            this.vehicle.model = vehicle.model;
+            this.vehicle.price = vehicle.price;
+            
+        }
+
     }
   };
+
 </script>
+
+
+
+
+
+
+
+
+
+
+
 
 <style>
 
@@ -148,6 +276,17 @@
 
     .el-tabs .el-tab-pane .priceinput {
         width: 505px;
+    }
+
+    .el-tabs .el-tab-pane .el-button--primary {
+        color: #FFF;
+        background-color: #409EFF;
+        border-color: #409EFF;
+        margin-bottom: 20px;
+    }
+
+    .el-tabs .el-tab-pane .desciption{
+        margin-bottom: 20px;
     }
 
 

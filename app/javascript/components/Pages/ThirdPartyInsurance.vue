@@ -283,17 +283,17 @@
   }
   .box-card .Right-card .Kind{
     
-    width: 455px;
+    width: 505px;
   }
 
 
   .box-card .Right-card .Year{
-    width: 455px;
+    width: 505px;
   }
 
   .box-card .Right-card .prev-co{
     margin-top: 30px;
-    width: 455px;
+    width: 505px;
   }
 
  
@@ -329,12 +329,12 @@
 
   .box-card .Right-card .percent_discount{
     margin-top: 10px;
-    width: 455px;
+    width: 505px;
   }
 
   .box-card .Right-card .s4_discount{
     margin-top: 30px;
-    width: 455px;
+    width: 505px;
   }
 
 </style>

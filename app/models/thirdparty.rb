@@ -3,7 +3,7 @@ class Thirdparty < ApplicationRecord
     validates :brand, presence: true
     validates :model, presence: true
     validates :price, presence: true
-    validates :year, presence: true
+    # validates :year, presence: true
 
 
 end
