@@ -3,7 +3,7 @@
 
         <el-row>
             <el-col :span="3" >
-                <li><router-link to="/user/recharge">ورود/ثبت نام</router-link></li>
+                <li><router-link to="/Login">ورود/ثبت نام</router-link></li>
             </el-col>  
 
             <el-col :span="19" class="navbar__menu-box">

@@ -9,14 +9,15 @@ import ThirdPartyInsurance from '../components/Pages/ThirdPartyInsurance.vue';
 import CarBodyInsurance from '../components/Pages/CarBodyInsurance.vue';
 import MotorcycleInsurance from '../components/Pages/MotorcycleInsurance.vue';
 import AddInsurance from '../components/Pages/AddInsurance.vue';
-
-
+import Login from '../components/Pages/Login.vue';
+import Register from '../components/Pages/Register.vue';
 // import { Header } from 'element-ui';
 
 
 Vue.use(VueRouter);
 
 export default new VueRouter({
+    // mode: 'history',
     routes: [
 
         {
@@ -55,7 +56,19 @@ export default new VueRouter({
             component: AddInsurance
         },
 
+        {
+            path: '/Login',
+            name: 'Login',
+            component: Login
+        },
 
+        {
+            path: '/Register',
+            name: 'Register',
+            component: Register
+        },
+
+        
         
     ],
     // mode: 'history'
