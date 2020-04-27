@@ -2,9 +2,14 @@
     <ul id="menu">
 
         <el-row>
-            <el-col :span="3" >
-                <li><router-link to="/Login">ورود/ثبت نام</router-link></li>
+            <el-col :span="3" v-if="!this.$store.state.userIsAuthorized">
+                <li><router-link to="/Login" >ورود/ثبت نام</router-link></li>
             </el-col>  
+
+            <el-col :span="3" v-if="this.$store.state.userIsAuthorized">
+                <el-button class="nav_btn" type="text" @click="Logout">خروج</el-button>
+            </el-col>
+
 
             <el-col :span="19" class="navbar__menu-box">
                 <li><router-link  to="/">صفحه اصلی</router-link></li>
@@ -46,7 +51,7 @@
                 </ul>
             </li>
 
-            <li><router-link  to="/AddInsurance">اضافه کردن بیمه</router-link></li>
+            <li><router-link  to="/AddInsurance" v-if="this.$store.state.userRole=='Admin'">اضافه کردن بیمه</router-link></li>
         </el-col>
 
         <el-col :span="2" class="navbar__logo-box">
@@ -82,8 +87,10 @@
             };
         },
         methods: {
-            
-        }
+            Logout (){
+                console.log('Logout')
+            }
+        },
     };
 </script>
 
@@ -136,6 +143,8 @@
         line-height: 0;
     }
 
+    
+
     #menu a
     {
         /* font-family: IRANSans; */
@@ -150,6 +159,25 @@
         text-decoration: none;
         text-shadow: 0 1px 0 #000;
     }
+
+    #menu .nav_btn
+    {
+        font: bold 11px/25px IRANSans;
+        float: left;
+        height: 25px;
+        padding: 0 20px;
+        margin-left: 60px;
+        color: #999;
+        text-decoration: none;
+        text-shadow: 0 1px 0 #000;
+    }
+
+    #menu .nav_btn:hover{
+         color: #fafafa;
+    }
+
+
+    
 
     #menu li:hover > a
     {

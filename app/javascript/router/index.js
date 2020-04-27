@@ -53,7 +53,8 @@ export default new VueRouter({
         {
             path: '/AddInsurance',
             name: 'AddInsurance',
-            component: AddInsurance
+            component: AddInsurance,
+            
         },
 
         {
