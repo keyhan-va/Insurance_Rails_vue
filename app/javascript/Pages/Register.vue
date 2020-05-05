@@ -1,13 +1,14 @@
 <template>
   <div class="login">
     <el-card>
-      <h2>Login</h2>
+      <h2>Register</h2>
       <el-form class="login-form"  ref="form" @submit.native.prevent="onSubmit">
 
         <el-form-item prop="email"> <el-input v-model="email" placeholder="E-mail"></el-input></el-form-item>
         <el-form-item prop="password"><el-input v-model="password" placeholder="Password" type="password"></el-input></el-form-item>
-        <el-form-item><el-button :loading="loading" class="Register-button" type="primary" native-type="submit" block>Login</el-button></el-form-item>
-        <router-link to="/Register"> Register</router-link>
+        <el-form-item prop="confirm_password"><el-input v-model="confirm_password" placeholder="password again" type="password"></el-input></el-form-item>
+        <el-form-item><el-button :loading="loading" class="Register-button" type="primary" native-type="submit" block>Register</el-button></el-form-item>
+        <router-link to="/Login"> login</router-link>
       </el-form>
     </el-card>
   </div>
@@ -18,13 +19,14 @@
 <script>
 import Axios from 'axios';
 export default {
-  name: "login",
+  name: "Register",
   props: ['app'],
   data() {
     return {
      loading: false,
      email: '',
      password: '',
+     confirm_password: '',
      errors: [],
     }
     
@@ -42,24 +44,28 @@ export default {
           {
               this.errors.push('password is requierd.');
           }
-          
-          
+          if (!this.confirm_password)
+          {
+              this.errors.push('confirm_password is requierd.');
+          }
+          if (this.password !== this.confirm_password  )
+          {
+              this.errors.push('passwords do not match.');
+          }
           if (!this.errors.length) 
           {
               const data = {
                   email: this.email,
                   password: this.password,
-                 
+                  confirm_password: this.confirm_password,
               }
 
               
-              axios.post('/sign_in',{sign_in:{email:this.email,password:this.password}})
+              axios.post('/sign_up',{user:{email:this.email,password:this.password,password_confirmation:this.confirm_password}})
               .then((Response)=>{
-                  localStorage.setItem('email',Response.data.email)
-                  this.email = ''
-                  this.password = ''
+
                   this.$router.push('/Home');
-                  console.log(user);
+                  console.log(Response);
               })
               .catch((error)=>{
                 console.log(error);

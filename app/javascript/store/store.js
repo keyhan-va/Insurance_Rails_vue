@@ -1,14 +1,25 @@
-export default {
+import Vue from 'vue'
+import Vuex from 'vuex'
+import auth from './modules/auth'
+
+Vue.use(Vuex);
+
+export default new Vuex.Store({
+
     state: {
-        welcomeMessage: 'welcome to my vue app',
-        userIsAuthorized: true,
-        userRole: 'Admin',
+        
     },
-    getters: {
-        welcome(state){
-            return state.welcomeMessage;
-        }
+
+    mutations: {
+
     },
-    mutations: {},
-    actions: {}
-}
+
+    actions: {
+
+    },
+
+    modules: {
+        auth,
+    },
+});
+    

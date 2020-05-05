@@ -4,14 +4,14 @@ import VueRouter from 'vue-router';
 
 import Navigation from '../components/shared/Navigation.vue';
 import Header from '../components/shared/Header.vue';
-import Home from '../components/Pages/Home.vue';
-import ThirdPartyInsurance from '../components/Pages/ThirdPartyInsurance.vue';
-import CarBodyInsurance from '../components/Pages/CarBodyInsurance.vue';
-import MotorcycleInsurance from '../components/Pages/MotorcycleInsurance.vue';
-import AddInsurance from '../components/Pages/AddInsurance.vue';
-import Login from '../components/Pages/Login.vue';
-import Register from '../components/Pages/Register.vue';
-// import { Header } from 'element-ui';
+import Home from '../Pages/Home.vue';
+import ThirdPartyInsurance from '../Pages/ThirdPartyInsurance.vue';
+import CarBodyInsurance from '../Pages/CarBodyInsurance.vue';
+import MotorcycleInsurance from '../Pages/MotorcycleInsurance.vue';
+import AddInsurance from '../Pages/AddInsurance.vue';
+import Login from '../Pages/Login.vue';
+import Register from '../Pages/Register.vue';
+
 
 
 Vue.use(VueRouter);
@@ -72,7 +72,6 @@ export default new VueRouter({
         
         
     ],
-    // mode: 'history'
-    
+     
 })
 

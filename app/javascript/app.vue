@@ -4,9 +4,6 @@
 
     <AppNavigation></AppNavigation>
     <router-view></router-view>
-    <!-- <AppHeader></AppHeader> -->
-    <!-- <h1>Keyhan Valieh</h1>
-    <Home></Home> -->
     <AppFooter></AppFooter>
   </div>
 </template>

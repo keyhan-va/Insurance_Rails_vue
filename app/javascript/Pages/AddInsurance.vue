@@ -1,5 +1,5 @@
 <template>
-    <el-tabs type="border-card">
+    <el-tabs type="border-card" >
         
         <el-tab-pane label="Config">Config</el-tab-pane>
         <el-tab-pane label="Role">Role</el-tab-pane>

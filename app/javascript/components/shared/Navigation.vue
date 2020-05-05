@@ -2,11 +2,11 @@
     <ul id="menu">
 
         <el-row>
-            <el-col :span="3" v-if="!this.$store.state.userIsAuthorized">
+            
+            <el-col :span="3" v-if="!this.$store.state.auth.userIsAuthorized">
                 <li><router-link to="/Login" >ورود/ثبت نام</router-link></li>
             </el-col>  
-
-            <el-col :span="3" v-if="this.$store.state.userIsAuthorized">
+            <el-col :span="3" v-if="this.$store.state.auth.userIsAuthorized">
                 <el-button class="nav_btn" type="text" @click="Logout">خروج</el-button>
             </el-col>
 
@@ -51,7 +51,7 @@
                 </ul>
             </li>
 
-            <li><router-link  to="/AddInsurance" v-if="this.$store.state.userRole=='Admin'">اضافه کردن بیمه</router-link></li>
+            <li><router-link  to="/AddInsurance" v-if="this.$store.state.auth.userRole=='admin'">اضافه کردن بیمه</router-link></li>
         </el-col>
 
         <el-col :span="2" class="navbar__logo-box">
@@ -81,6 +81,7 @@
 
 
 <script>
+    
     export default {
         data() {
             return {
@@ -88,7 +89,8 @@
         },
         methods: {
             Logout (){
-                console.log('Logout')
+            //    this.$store.commit('setUserIsAuthenticated',false);
+            //    this.$store.commit('setUserRole','')
             }
         },
     };
