@@ -6,7 +6,7 @@
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.2.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "element-ui": "^2.13.0",
     "google-fonts-webpack-plugin": "^0.4.4",
     "i": "^0.3.6",
