@@ -9,7 +9,7 @@
     "axios": "^0.19.2",
     "element-ui": "^2.13.0",
     "google-fonts-webpack-plugin": "^0.4.4",
-    "i": "^0.3.6",
+    "i": "^0.3.7",
     "vue": "^2.6.11",
     "vue-loader": "^15.9.1",
     "vue-persian-datetime-picker": "^2.1.5",
